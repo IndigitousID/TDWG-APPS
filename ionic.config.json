@@ -1,0 +1,7 @@
+{
+  "name": "TDWG-APPS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
