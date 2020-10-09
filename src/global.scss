@@ -24,3 +24,55 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+:root {
+    --ion-color-tdwg: #3471ec;
+    --ion-color-tdwg-rgb: 52,113,236;
+    --ion-color-tdwg-contrast: #ffffff;
+    --ion-color-tdwg-contrast-rgb: 255,255,255;
+    --ion-color-tdwg-shade: #2e63d0;
+    --ion-color-tdwg-tint: #487fee;
+  }
+
+  .ion-color-tdwg {
+    --ion-color-base: var(--ion-color-tdwg);
+    --ion-color-base-rgb: var(--ion-color-tdwg-rgb);
+    --ion-color-contrast: var(--ion-color-tdwg-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-tdwg-contrast-rgb);
+    --ion-color-shade: var(--ion-color-tdwg-shade);
+    --ion-color-tint: var(--ion-color-tdwg-tint);
+  }
+
+
+  :root {
+    --ion-color-tdwg2: #f5f8ff;
+    --ion-color-tdwg2-rgb: 245,248,255;
+    --ion-color-tdwg2-contrast: #000000;
+    --ion-color-tdwg2-contrast-rgb: 0,0,0;
+    --ion-color-tdwg2-shade: #d8dae0;
+    --ion-color-tdwg2-tint: #f6f9ff;
+  }
+  
+  .ion-color-new {
+    --ion-color-base: var(--ion-color-tdwg2);
+    --ion-color-base-rgb: var(--ion-color-tdwg2-rgb);
+    --ion-color-contrast: var(--ion-color-tdwg2-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-tdwg2-contrast-rgb);
+    --ion-color-shade: var(--ion-color-tdwg2-shade);
+    --ion-color-tint: var(--ion-color-tdwg2-tint);
+  }
+
+
+.container {
+    height: 100vh;
+}
+
+.tdwg__background__wrapper {
+    background-color: #3471ec;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
