@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageThreePage implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
 
+  kunjungiLink(url) {
+    window.open(url, "_blank");
+  }
+  bagikan() {
+    alert ("Terima kasih anda telah berkat bagi mereka hari ini");
+  }
 }

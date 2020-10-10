@@ -38,6 +38,6 @@ export class SettingsPage implements OnInit {
   }
 
   back(){
-    this.router.navigateByUrl('page-one');
+    this.router.navigateByUrl('dashboard');
   }
 }
