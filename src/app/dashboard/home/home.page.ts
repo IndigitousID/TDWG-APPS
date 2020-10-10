@@ -1,8 +1,8 @@
-import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
+import { ResourceResponseData } from '../../auth/auth-response';
 import { Storage } from  '@ionic/storage';
 import { Router } from  "@angular/router";
-import { ResourcePreference } from  "./../../auth/auth.response";
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,8 @@ export class Home implements OnInit {
 
   userName : string = "TDWG";
   direktori : Array<string> = [];
-  resource : ResourcePreference = [];
-  notifikasi : ResourcePreference = [];
+  resource : ResourceResponseData;
+  notifikasi : ResourceResponseData;
   userLogged : boolean = false;
 
   constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router) { }

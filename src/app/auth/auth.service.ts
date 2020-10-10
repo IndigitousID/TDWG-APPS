@@ -6,7 +6,7 @@ import { Observable, BehaviorSubject } from  'rxjs';
 import { Storage } from  '@ionic/storage';
 import { User } from  './user';
 import { Preferensi } from  './preferensi';
-import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse, DirektoriResponse, ResourceResponse, ResourceResponseData } from  './auth-response';
+import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse, DirektoriResponse, ResourceResponse, NotifikasiResponse } from  './auth-response';
 
 
 @Injectable({
@@ -105,9 +105,9 @@ export class AuthService {
     );
   }
 
-  notifikasi(): Observable<ResourceResponseData> {
+  notifikasi(): Observable<NotifikasiResponse> {
     return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/notifikasi`).pipe(
-      tap(async (res: ResourceResponseData) => {
+      tap(async (res: NotifikasiResponse) => {
 
         if (res.status) {
           console.log("pref" , res.data);
@@ -118,7 +118,7 @@ export class AuthService {
 
 
   logout(): Observable<AuthRegisterResponse> {
-    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/logout`).pipe(
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/logout`, []).pipe(
       tap(async (res: AuthRegisterResponse) => {
 
         if (res.status) {

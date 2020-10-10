@@ -37,8 +37,13 @@ export interface AuthRegisterResponse {
 
 export interface PreferensiResponse {
     status: boolean;
-    data: PreferensiResponseData[];
+    data: PaginatePreferensi;
     message: string;
+}
+
+export interface PaginatePreferensi {
+    total: number;
+    data: PreferensiResponseData;
 }
 
 export interface PreferensiResponseData {
@@ -58,8 +63,13 @@ export interface DirektoriResponse {
 
 export interface ResourceResponse {
     status: boolean;
-    data: ResourceResponseData[];
+    data: PaginateResource;
     message: string;
+}
+
+export interface PaginateResource {
+    total: number;
+    data: ResourceResponseData;
 }
 
 export interface ResourceResponseData {
@@ -72,6 +82,13 @@ export interface ResourceResponseData {
     media_tipe: string;
     media_url: string;
     published_at: string;
+    jam: string;
     updated_at: string;
     created_at: string;
  }
+
+export interface NotifikasiResponse {
+    status: boolean;
+    data: ResourceResponseData;
+    message: string;
+}
