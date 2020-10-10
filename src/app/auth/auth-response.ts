@@ -34,3 +34,25 @@ export interface AuthRegisterResponse {
     data: RegisterResponseData;
     message: string;
  }
+
+export interface PreferensiResponse {
+    status: boolean;
+    data: PreferensiResponseData;
+    message: string;
+}
+
+export interface PreferensiResponseData {
+    id: number;
+    jam: string;
+    hari: string;
+    direktori: string;
+    updated_at: string;
+    created_at: string;
+ }
+
+
+export interface DirektoriResponse {
+    status: boolean;
+    data: Array<string>;
+    message: string;
+}
