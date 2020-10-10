@@ -15,11 +15,13 @@ export class PageOnePage implements OnInit {
   ngOnInit() {
 
     this.storage.get('User_Name').then((result) => {
-      console.log('My result', result);
+      //console.log('My result', result);
       if (result) {
         this.userName = result;
       }
     });
+
+    
   }
 
 }
