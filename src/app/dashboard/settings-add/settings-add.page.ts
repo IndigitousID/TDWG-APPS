@@ -11,7 +11,7 @@ import { Router } from  "@angular/router";
 export class SettingsAddPage implements OnInit {
 
   userName : string = "TDWG";
-  direktori : array = [];
+  direktori : Array<string> = [];
 
   constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router) { }
 

@@ -53,6 +53,6 @@ export interface PreferensiResponseData {
 
 export interface DirektoriResponse {
     status: boolean;
-    data: array;
+    data: Array<string>;
     message: string;
 }

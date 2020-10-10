@@ -11,7 +11,7 @@ import { Router } from  "@angular/router";
 export class SettingsPage implements OnInit {
 
   userName : string = "TDWG";
-  preferensi : array = [];
+  preferensi : Array<string> = [];
 
   constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router) { }
 
@@ -22,7 +22,7 @@ export class SettingsPage implements OnInit {
       }
     });
     this.authService.preferensi().subscribe((res)=>{
-       this.preferensi = res.data.data;
+       this.preferensi = res.data;
     });
   }
 
