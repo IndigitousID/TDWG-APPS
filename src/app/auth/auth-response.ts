@@ -37,7 +37,7 @@ export interface AuthRegisterResponse {
 
 export interface PreferensiResponse {
     status: boolean;
-    data: PreferensiResponseData;
+    data: PreferensiResponseData[];
     message: string;
 }
 
