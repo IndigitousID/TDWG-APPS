@@ -50,9 +50,28 @@ export interface PreferensiResponseData {
     created_at: string;
  }
 
-
 export interface DirektoriResponse {
     status: boolean;
     data: Array<string>;
     message: string;
 }
+
+export interface ResourceResponse {
+    status: boolean;
+    data: ResourceResponseData[];
+    message: string;
+}
+
+export interface ResourceResponseData {
+    id: number;
+    judul: string;
+    direktori: string;
+    subdirektori: string;
+    konten: string;
+    thumbnail: string;
+    media_tipe: string;
+    media_url: string;
+    published_at: string;
+    updated_at: string;
+    created_at: string;
+ }

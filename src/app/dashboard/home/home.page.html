@@ -1,0 +1,60 @@
+
+<ion-content color="tdwg" padding>
+  <ion-grid>
+    <ion-row justify-content-center style="padding-bottom:20px;">
+      <ion-col size-md="6" size-lg="5" size-xs="12">
+        <img src="/assets/images/tdwg_logo.png" style="margin: auto; padding-top:5px; padding-bottom: 5px; display: flex; max-width: 150px" />
+        <ion-label>
+          <!--<i style="text-align: center;">Kristus, saya dan mereka</i>-->
+          <!-- AREA LOGIN -->
+          <p style="text-align: center;" *ngIf="!userLogged">
+            <a color="primary" (click)="daftar()">Daftar</a> | <a color="primary" (click)="login()">Login</a>
+          </p>
+          <p style="text-align: center;" *ngIf="userLogged">
+            <a color="danger" (click)="logout()">Logout</a> | <a color="primary" (click)="pengaturan()">Pengaturan</a>
+          </p>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+
+    <!-- AREA NOTIFIKASI -->
+    <ion-card mode="ios" *ngFor="let item of notifikasi">
+      <ion-card-header>
+        <ion-card-subtitle style="text-align:left !important;"><ion-icon name="alarm"></ion-icon>&emsp;{{item.jam}}</ion-card-subtitle>
+        <ion-card-title style="text-align:left !important;">{{item.judul}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <!-- AREA UMUM -->
+    <div *ngFor="let item of direktori">
+      <ion-row justify-content-left style="padding-bottom:30px;">
+        <ion-col size-md="6" size-lg="6" size-xs="12">
+          <ion-row justify-content-center>
+            <ion-col size-md="8" size-lg="8" size-xs="8">
+              <ion-label style="padding-left:15px;">{{ item }}</ion-label>
+            </ion-col>
+            <ion-col size-md="4" size-lg="4" size-xs="4" style="text-align:right !important;padding-right:15px;">
+              <a>Semua</a>
+            </ion-col>
+          </ion-row>
+
+          <ion-slides pager>
+            <ion-slide *ngFor="let item2 of resource">
+              <ion-card mode="ios">
+                <img src="{{item2.thumbnail}}">
+                <ion-card-header>
+                  <ion-card-subtitle style="text-align:left !important;">{{item2.subdirektori}}</ion-card-subtitle>
+                  <ion-card-title style="text-align:left !important;">{{item2.judul}}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content style="text-align:left !important;">
+                  <a>Baca Selengkapnya</a>
+                </ion-card-content>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+</ion-content>

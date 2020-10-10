@@ -20,4 +20,7 @@ export class RegisterPage implements OnInit {
     });
   }
 
+  back(){
+    this.router.navigateByUrl('home');
+  }
 }

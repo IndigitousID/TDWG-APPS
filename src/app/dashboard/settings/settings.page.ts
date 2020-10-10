@@ -22,7 +22,7 @@ export class SettingsPage implements OnInit {
       }
     });
     this.authService.preferensi().subscribe((res)=>{
-       this.preferensi = res.data;
+      if(res.data) this.preferensi = res.data.data;
     });
   }
 
@@ -37,6 +37,6 @@ export class SettingsPage implements OnInit {
   }
 
   back(){
-    this.router.navigateByUrl('page-one');
+    this.router.navigateByUrl('home');
   }
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path:'',
-    redirectTo:'dashboard',
+    redirectTo:'home',
     pathMatch:'full'
   },
   {
@@ -31,6 +31,10 @@ const routes: Routes = [
   {
     path: 'page-three',
     loadChildren: () => import('./dashboard/page-three/page-three.module').then( m => m.PageThreePageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./dashboard/home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'settings',

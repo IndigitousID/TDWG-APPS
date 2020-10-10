@@ -6,7 +6,7 @@ import { Observable, BehaviorSubject } from  'rxjs';
 import { Storage } from  '@ionic/storage';
 import { User } from  './user';
 import { Preferensi } from  './preferensi';
-import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse, DirektoriResponse } from  './auth-response';
+import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse, DirektoriResponse, ResourceResponse, ResourceResponseData } from  './auth-response';
 
 
 @Injectable({
@@ -94,11 +94,41 @@ export class AuthService {
     );
   }
 
-  async logout() {
-    await this.storage.remove('User_Name');
-    await this.storage.remove("ACCESS_TOKEN");
-   // await this.storage.remove("EXPIRES_IN");
-    this.authSubject.next(false);
+  resource(per_page: number): Observable<ResourceResponse> {
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/pengaturan/resource?per_page=` + per_page).pipe(
+      tap(async (res: ResourceResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
+
+  notifikasi(): Observable<ResourceResponseData> {
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/notifikasi`).pipe(
+      tap(async (res: ResourceResponseData) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
+
+
+  logout(): Observable<AuthRegisterResponse> {
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/logout`).pipe(
+      tap(async (res: AuthRegisterResponse) => {
+
+        if (res.status) {
+          this.storage.remove('User_Name');
+          this.storage.remove("ACCESS_TOKEN");
+          // await this.storage.remove("EXPIRES_IN");
+          // this.authSubject.next(false);
+        }
+      })
+    );
   }
 
   isLoggedIn() {
