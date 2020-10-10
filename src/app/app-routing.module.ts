@@ -47,7 +47,12 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./dashboard/about/about.module').then( m => m.AboutPageModule)
-  }
+  },
+  {
+    path:'**',
+    redirectTo:'dashboard',
+    pathMatch:'full'
+  },
 ];
 @NgModule({
   imports: [
