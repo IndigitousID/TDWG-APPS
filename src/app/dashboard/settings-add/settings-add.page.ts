@@ -5,13 +5,13 @@ import { Router } from  "@angular/router";
 
 @Component({
   selector: 'app-settings',
-  templateUrl: './settings.page.html',
-  styleUrls: ['./settings.page.scss'],
+  templateUrl: './settings-add.page.html',
+  styleUrls: ['./settings-add.page.scss'],
 })
-export class SettingsPage implements OnInit {
+export class SettingsAddPage implements OnInit {
 
   userName : string = "TDWG";
-  preferensi : array = [];
+  direktori : array = [];
 
   constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router) { }
 
@@ -21,22 +21,18 @@ export class SettingsPage implements OnInit {
         this.userName = result;
       }
     });
-    this.authService.preferensi().subscribe((res)=>{
-       this.preferensi = res.data.data;
+    this.authService.direktori().subscribe((res)=>{
+       this.direktori = res.data;
     });
   }
 
-  tambah(){
-    this.router.navigateByUrl('settings-add');
-  }
-
-  hapus(id){
-    this.authService.hapusPreferensi(id).subscribe((res)=>{
-      this.ngOnInit();
+  simpan(form){
+    this.authService.simpanPreferensi(form.value).subscribe((res)=>{
+      this.router.navigateByUrl('settings');
     });
   }
 
   back(){
-    this.router.navigateByUrl('page-one');
+    this.router.navigateByUrl('settings');
   }
 }

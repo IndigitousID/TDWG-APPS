@@ -37,6 +37,10 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/settings/settings.module').then( m => m.SettingsPageModule)
   },
   {
+    path: 'settings-add',
+    loadChildren: () => import('./dashboard/settings-add/settings-add.module').then( m => m.SettingsAddPageModule)
+  },
+  {
     path: 'about',
     loadChildren: () => import('./dashboard/about/about.module').then( m => m.AboutPageModule)
   }

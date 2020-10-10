@@ -5,15 +5,16 @@ import { Observable, BehaviorSubject } from  'rxjs';
 
 import { Storage } from  '@ionic/storage';
 import { User } from  './user';
-import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse } from  './auth-response';
+import { Preferensi } from  './preferensi';
+import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse, DirektoriResponse } from  './auth-response';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  AUTH_SERVER_ADDRESS:  string  =  'http://127.0.0.1:8000/api';
-//  AUTH_SERVER_ADDRESS:  string  =  'http://thisdaywithgod.org/index.php/api';
+//  AUTH_SERVER_ADDRESS:  string  =  'http://127.0.0.1:8000/api';
+  AUTH_SERVER_ADDRESS:  string  =  'http://thisdaywithgod.org/index.php/api';
   authSubject  =  new  BehaviorSubject(false);
 
 
@@ -52,6 +53,39 @@ export class AuthService {
   preferensi(): Observable<PreferensiResponse> {
     return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi`).pipe(
       tap(async (res: PreferensiResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
+
+  simpanPreferensi(preferensi: Preferensi): Observable<PreferensiResponse> {
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi`, preferensi).pipe(
+      tap(async (res: PreferensiResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
+
+  hapusPreferensi(id: string): Observable<PreferensiResponse> {
+    return this.httpClient.delete(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi/`+id).pipe(
+      tap(async (res: PreferensiResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
+
+  direktori(): Observable<DirektoriResponse> {
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/pengaturan/direktori`).pipe(
+      tap(async (res: DirektoriResponse) => {
 
         if (res.status) {
           console.log("pref" , res.data);

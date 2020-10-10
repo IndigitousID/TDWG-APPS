@@ -49,3 +49,10 @@ export interface PreferensiResponseData {
     updated_at: string;
     created_at: string;
  }
+
+
+export interface DirektoriResponse {
+    status: boolean;
+    data: array;
+    message: string;
+}
