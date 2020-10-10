@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>MH Today</ion-title>
+    <div style="text-align:right">
+      <ion-icon *ngIf="isLoggedIn()" style="margin-right:5px;font-size:22px;" name="log-out-outline" (click)="logoutNow()"></ion-icon> 
+      <ion-icon *ngIf="!isLoggedIn()" style="margin-right:5px;font-size:22px;" name="log-in-outline" (click)="loginNow()"></ion-icon>  
+      <img src="/assets/images/tdwg_logo.png" width="34px" (click)="aboutUs()"/>
+    </div>
   </ion-toolbar>
 </ion-header>
 

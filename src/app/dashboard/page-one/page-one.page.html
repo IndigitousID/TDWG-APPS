@@ -2,9 +2,17 @@
 <ion-content color="tdwg" padding>
   <ion-grid>
     <ion-row justify-content-center>
-      <ion-col size-md="6" size-lg="5" size-xs="12">
+      <ion-col size-md="6" size-lg="5" size-xs="8">
         <ion-label>Selamat Pagi</ion-label>
-        <h2>Kak Setiawan</h2>
+        <h2>{{userName}}</h2>
+      </ion-col>
+      <ion-col size-md="6" size-lg="5" size-xs="4">
+        <div style="text-align:right">
+          <ion-icon *ngIf="isLoggedIn()" style="margin-right:5px;font-size:22px;" name="log-out-outline" (click)="logoutNow()"></ion-icon> 
+          <ion-icon *ngIf="!isLoggedIn()" style="margin-right:5px;font-size:22px;" name="log-in-outline" (click)="loginNow()"></ion-icon>  
+          <img src="/assets/images/tdwg_logo.png" width="34px" (click)="aboutUs()"/>
+        </div>
+
       </ion-col>
     </ion-row>
     <ion-row justify-content-center>
@@ -88,7 +96,7 @@
     </ion-row>
   </ion-grid>
 </ion-content>
-<ion-footer>
+<ion-footer *ngIf="isLoggedIn()">
   <ion-toolbar color="primary">
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="6" size-xs="6">
