@@ -8,41 +8,19 @@
   <ion-grid>
     <ion-row justify-content-center>
       <ion-col size-md="6" size-lg="5" size-xs="12">
-        <ion-label>Halo</ion-label>
-        <h2>TDWG</h2>
+        <ion-label>
+          <small>Halo</small>
+          <h2>{{userName}}</h2>
+        </ion-label>
       </ion-col>
     </ion-row>
-    <ion-row justify-content-center>
+    <ion-row justify-content-center  *ngFor="let item of preferensi">
       <ion-col size-md="6" size-lg="5" size-xs="12">
         <div text-center padding class="main__region" style="border-radius:5px;">
-          <h4>18:00</h4>
-          <p>Senin | MH Today</p>
+          <h4>{{item.jam}}</h4>
+          <p>{{item.hari}} | {{item.direktori}}</p>
         </div>
       </ion-col>
     </ion-row>
-    <ion-row justify-content-center>
-      <ion-col size-md="6" size-lg="5" size-xs="12">
-        <div text-center padding class="main__region" style="border-radius:5px;">
-          <h4>18:00</h4>
-          <p>Senin | MH Today</p>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row justify-content-center>
-      <ion-col size-md="6" size-lg="5" size-xs="12">
-        <div text-center padding class="main__region" style="border-radius:5px;">
-          <h4>18:00</h4>
-          <p>Senin | MH Today</p>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row justify-content-center>
-      <ion-col size-md="6" size-lg="5" size-xs="12">
-        <div text-center padding class="main__region" style="border-radius:5px;">
-          <h4>18:00</h4>
-          <p>Senin | MH Today</p>
-        </div>
-      </ion-col>
-    </ion-row>
-    </ion-grid>
+  </ion-grid>
 </ion-content>

@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from  'rxjs';
 
 import { Storage } from  '@ionic/storage';
 import { User } from  './user';
-import { AuthLoginResponse, AuthRegisterResponse } from  './auth-response';
+import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse } from  './auth-response';
 
 
 @Injectable({
@@ -43,6 +43,17 @@ export class AuthService {
          // await this.storage.set("ACCESS_TOKEN", res.user.access_token);
          // await this.storage.set("EXPIRES_IN", res.user.expires_in);
           this.authSubject.next(true);
+        }
+      })
+    );
+  }
+
+  preferensi(): Observable<PreferensiResponse> {
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi`).pipe(
+      tap(async (res: PreferensiResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
         }
       })
     );
