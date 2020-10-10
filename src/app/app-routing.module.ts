@@ -27,6 +27,18 @@ const routes: Routes = [
   {
     path: 'page-two',
     loadChildren: () => import('./dashboard/page-two/page-two.module').then( m => m.PageTwoPageModule)
+  },
+  {
+    path: 'page-three',
+    loadChildren: () => import('./dashboard/page-three/page-three.module').then( m => m.PageThreePageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./dashboard/settings/settings.module').then( m => m.SettingsPageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./dashboard/about/about.module').then( m => m.AboutPageModule)
   }
 ];
 @NgModule({

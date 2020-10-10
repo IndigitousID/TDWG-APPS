@@ -1,7 +1,8 @@
 {
   "name": "TDWG-APPS",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

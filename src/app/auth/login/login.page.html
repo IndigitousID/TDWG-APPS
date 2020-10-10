@@ -21,6 +21,7 @@
             <ion-item>
               <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
             </ion-item>
+              <ion-input name="device_name" type="text" [(ngModel)]="dev_name" hidden></ion-input>
           </div>
           <div padding>
             <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>

@@ -9,6 +9,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginPage implements OnInit {
 
+  dev_name : string = "iphone";
   constructor(private  authService:  AuthService, private  router:  Router) { }
 
   ngOnInit() {
@@ -16,9 +17,10 @@ export class LoginPage implements OnInit {
 
 
   login(form){
-    console.log("form", form);
-    //this.authService.login(form.value).subscribe((res)=>{
-      this.router.navigateByUrl('dashboard');
-   // });
+    console.log("form", form.value);
+    this.authService.login(form.value).subscribe((res)=>{
+      console.log(res);
+      this.router.navigateByUrl('page-one');
+    });
   }
 }

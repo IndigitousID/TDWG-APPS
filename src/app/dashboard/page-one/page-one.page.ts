@@ -1,4 +1,6 @@
+import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Storage } from  '@ionic/storage';
 
 @Component({
   selector: 'app-page-one',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageOnePage implements OnInit {
 
-  constructor() { }
+  userName : string = "TDWG";
+  constructor( private  storage:  Storage) { }
 
   ngOnInit() {
+
+    this.storage.get('User_Name').then((result) => {
+      console.log('My result', result);
+      if (result) {
+        this.userName = result;
+      }
+    });
   }
 
 }
