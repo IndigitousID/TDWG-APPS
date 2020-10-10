@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <h4 *ngIf="direktori">
+        <ion-icon name="arrow-back" color="primary" (click)="back()"></ion-icon>
+        &emsp;{{ direktori }}
+      </h4>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="tdwg" padding>
+  <ion-grid>
+    <ion-card mode="ios" *ngFor="let item2 of resources">
+      <img src="{{item2.thumbnail}}">
+      <ion-card-header>
+        <ion-card-subtitle style="text-align:left !important;">{{item2.subdirektori}}</ion-card-subtitle>
+        <ion-card-title style="text-align:left !important;">{{item2.judul}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content style="text-align:left !important;">
+        <a (click)="content(item2)">Baca Selengkapnya</a>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
+</ion-content>

@@ -29,6 +29,14 @@ export class Home implements OnInit {
     this.storage.get('ACCESS_TOKEN').then((result) => {
       if (result) {
         this.userLogged = true;
+
+        this.authService.notifikasi().subscribe((res)=>{
+          if(res.data && this.userLogged) {
+            this.notifikasi = res.data;
+          }
+          else { this.notifikasi = null; }
+        });
+
       }else{
         this.userLogged = false;
       }
@@ -40,10 +48,6 @@ export class Home implements OnInit {
     
     this.authService.resource(4).subscribe((res)=>{
        if(res.data) this.resource = res.data.data;
-    });
-
-    this.authService.notifikasi().subscribe((res)=>{
-       if(res.data && this.userLogged) this.notifikasi = res.data;
     });
   }
 
@@ -63,5 +67,19 @@ export class Home implements OnInit {
 
   pengaturan(){
     this.router.navigateByUrl('settings');
+  }
+
+  baca(item){
+    this.authService.bacaNotifikasi({jam: item.jam, direktori: item.direktori}).subscribe((res)=>{
+      this.router.navigateByUrl(`content/${item.id}`);
+    });
+  }
+
+  content(item){
+    this.router.navigateByUrl(`content/${item.id}`);
+  }
+
+  contents(direktori){
+    this.router.navigateByUrl(`contents/${direktori}`);
   }
 }

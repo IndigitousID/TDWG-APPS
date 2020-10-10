@@ -1,11 +1,12 @@
 import { Injectable } from  '@angular/core';
-import { HttpClient } from  '@angular/common/http';
+import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import { tap } from  'rxjs/operators';
 import { Observable, BehaviorSubject } from  'rxjs';
 
 import { Storage } from  '@ionic/storage';
 import { User } from  './user';
 import { Preferensi } from  './preferensi';
+import { Notifikasi } from  './notifikasi';
 import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse, DirektoriResponse, ResourceResponse, NotifikasiResponse } from  './auth-response';
 
 
@@ -17,8 +18,23 @@ export class AuthService {
   AUTH_SERVER_ADDRESS:  string  =  'http://thisdaywithgod.org/index.php/api';
   authSubject  =  new  BehaviorSubject(false);
 
-
   constructor(private  httpClient:  HttpClient, private  storage:  Storage) { }
+
+  buildHeaders(){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'withCredentials': 'true'
+    });
+
+    return this.storage.get('ACCESS_TOKEN').then((token) => {
+        if(token){
+          console.log('token', token);
+          headers.append('Authorization', 'Bearer ' + token);
+          return headers;
+        }
+      }
+    )
+  }
 
   register(user: User): Observable<AuthRegisterResponse> {
     return this.httpClient.post<AuthRegisterResponse>(`${this.AUTH_SERVER_ADDRESS}/register`, user).pipe(
@@ -105,6 +121,28 @@ export class AuthService {
     );
   }
 
+  resources(direktori: string): Observable<ResourceResponse> {
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/pengaturan/resource?direktori=` + direktori).pipe(
+      tap(async (res: ResourceResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
+
+  detailResource(id: number): Observable<NotifikasiResponse> {
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/pengaturan/resource/`+id).pipe(
+      tap(async (res: NotifikasiResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
+
   notifikasi(): Observable<NotifikasiResponse> {
     return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/notifikasi`).pipe(
       tap(async (res: NotifikasiResponse) => {
@@ -116,6 +154,16 @@ export class AuthService {
     );
   }
 
+  bacaNotifikasi(input: Notifikasi): Observable<NotifikasiResponse> {
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/notifikasi`, input).pipe(
+      tap(async (res: NotifikasiResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
 
   logout(): Observable<AuthRegisterResponse> {
     return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/logout`, []).pipe(

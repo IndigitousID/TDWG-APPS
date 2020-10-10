@@ -45,6 +45,14 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/settings-add/settings-add.module').then( m => m.SettingsAddPageModule)
   },
   {
+    path: 'contents/:direktori',
+    loadChildren: () => import('./dashboard/contents/contents.module').then( m => m.ContentsPageModule)
+  },
+  {
+    path: 'content/:contentId',
+    loadChildren: () => import('./dashboard/content/content.module').then( m => m.ContentPageModule)
+  },
+  {
     path: 'about',
     loadChildren: () => import('./dashboard/about/about.module').then( m => m.AboutPageModule)
   },
