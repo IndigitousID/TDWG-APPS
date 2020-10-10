@@ -82,4 +82,8 @@ export class Home implements OnInit {
   contents(direktori){
     this.router.navigateByUrl(`contents/${direktori}`);
   }
+
+  tentang(){
+    this.router.navigateByUrl('about');
+  }
 }

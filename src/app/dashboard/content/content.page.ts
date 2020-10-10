@@ -28,4 +28,8 @@ export class ContentPage implements OnInit {
   back(direktori){
     this.router.navigateByUrl('contents/' + direktori);
   }
+
+  bagikan() {
+    alert ("Terima kasih anda telah berkat bagi mereka hari ini");
+  }
 }
