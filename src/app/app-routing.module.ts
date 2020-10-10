@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path:'',
-    redirectTo:'login',
+    redirectTo:'dashboard',
     pathMatch:'full'
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./auth/register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'page-one',
+    path: 'dashboard',
     loadChildren: () => import('./dashboard/page-one/page-one.module').then( m => m.PageOnePageModule)
   },
   {
