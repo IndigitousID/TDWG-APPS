@@ -1,3 +1,4 @@
+import { PreferensiResponseData } from './../../auth/auth-response';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Storage } from  '@ionic/storage';
@@ -11,7 +12,7 @@ import { Router } from  "@angular/router";
 export class SettingsPage implements OnInit {
 
   userName : string = "TDWG";
-  preferensi : Array<string> = [];
+  preferensi : Array<PreferensiResponseData> = [];
 
   constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router) { }
 
