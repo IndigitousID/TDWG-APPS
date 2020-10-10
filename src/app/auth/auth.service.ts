@@ -132,7 +132,7 @@ export class AuthService {
     );
   }
 
-  detailResource(id: number): Observable<NotifikasiResponse> {
+  detailResource(id: string): Observable<NotifikasiResponse> {
     return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/pengaturan/resource/`+id).pipe(
       tap(async (res: NotifikasiResponse) => {
 

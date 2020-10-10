@@ -16,7 +16,7 @@ export class ContentPage implements OnInit {
   constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get( 'contentId' ) * 1;
+    let id = this.route.snapshot.paramMap.get( 'contentId' );
 
     this.authService.detailResource(id).subscribe((res)=>{
       if(res.data) this.resource = res.data;
