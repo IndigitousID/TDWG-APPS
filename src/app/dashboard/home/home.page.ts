@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { ResourceResponseData } from '../../auth/auth-response';
+import { ResourceResponseData, BerandaResponseData } from '../../auth/auth-response';
 import { Storage } from  '@ionic/storage';
 import { Router } from  "@angular/router";
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +13,13 @@ import { Router } from  "@angular/router";
 export class Home implements OnInit {
 
   userName : string = "TDWG";
-  direktori : Array<string> = [];
-  resource : ResourceResponseData;
+  beranda : BerandaResponseData;
   notifikasi : ResourceResponseData;
   userLogged : boolean = false;
 
-  constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router) { }
-
-  ngOnInit() {
+  constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router, public loadingController: LoadingController) { }
+ 
+  ionViewWillEnter () {
     this.storage.get('User_Name').then((result) => {
       if (result) {
         this.userName = result;
@@ -42,12 +42,37 @@ export class Home implements OnInit {
       }
     });
 
-    this.authService.direktori().subscribe((res)=>{
-       this.direktori = res.data;
+    this.authService.beranda().subscribe((res)=>{
+       this.beranda = res.data;
     });
-    
-    this.authService.resource(4).subscribe((res)=>{
-       if(res.data) this.resource = res.data.data;
+  }
+ 
+  ngOnInit() {
+    this.storage.get('User_Name').then((result) => {
+      if (result) {
+        this.userName = result;
+      }
+    });
+
+    this.storage.get('ACCESS_TOKEN').then((result) => {
+      if (result) {
+        this.userLogged = true;
+
+        this.authService.notifikasi().subscribe((res)=>{
+          if(res.data && this.userLogged) {
+            this.notifikasi = res.data;
+          }
+          else { this.notifikasi = null; }
+        });
+
+      }else{
+        this.userLogged = false;
+        this.notifikasi = null;
+      }
+    });
+
+    this.authService.beranda().subscribe((res)=>{
+       this.beranda = res.data;
     });
   }
 
@@ -59,10 +84,24 @@ export class Home implements OnInit {
     this.router.navigateByUrl('login');
   }
 
-  logout(){
-    this.authService.logout().subscribe((res)=>{
-      this.ngOnInit();
+  async logout(){
+    await this.authService.logout().subscribe((res)=>{
+      console.log('Bye');
     });
+
+    const loading = await this.loadingController.create({
+      spinner: null,
+      duration: 1000,
+      message: 'Keluar dari akun Anda...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading',
+      backdropDismiss: true
+    });
+    loading.present();
+
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 1000); 
   }
 
   pengaturan(){

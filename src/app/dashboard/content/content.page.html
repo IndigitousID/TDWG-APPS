@@ -18,25 +18,29 @@
           <h3 style="text-align:left !important; margin-bottom:0px;">
             {{resource.judul}}
           </h3>
-          <p style="text-align:right !important; margin-top:0px;"><small>{{resource.published_at  | date: 'd/MM/yyyy [H:mm]' }}</small></p>
+          <p style="text-align:left !important; margin-top:0px;"><small>{{resource.published_at  | date: 'd/MM/yyyy [H:mm]' }}</small></p>
         </div>
         <div padding>
-          <p style="text-align:left !important;">
+          <p style="text-align:justify !important;">
             {{resource.konten}}
           </p>
         </div>
         <div style="padding-bottom: 50px;">
-          <audio *ngIf="resource.media_tipe == 'audio'" src="{{resource.media_url}}" style="max-width: 100%;"></audio>
-          <video *ngIf="resource.media_tipe == 'video'" src="{{resource.media_url}}" style="max-width: 100%;"></video>
+          <audio *ngIf="resource.media_tipe == 'audio'" style="max-width: 100%;" controls>
+            <source src="{{resource.media_url}}" type="audio/mpeg">
+          </audio>
+          <video *ngIf="resource.media_tipe == 'video'" style="max-width: 100%;" controls>
+            <source src="{{resource.media_url}}" type="video/mp4">
+          </video>
           <img *ngIf="resource.media_tipe == 'image'" src="{{resource.media_url}}" style="max-width: 100%;">
-          <iframe *ngIf="resource.media_tipe == 'other'" src="{{resource.media_url}}" style="max-width: 100%;"></iframe>
+          <a *ngIf="resource.media_tipe == 'other'" onclick="window.open(resource.media_url)" style="max-width: 100%;">Tautan Luar</a>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="resource">
   <ion-toolbar>
     <ion-title (click)="bagikan()" color="primary" style="text-align:center">Bagikan</ion-title>
   </ion-toolbar>

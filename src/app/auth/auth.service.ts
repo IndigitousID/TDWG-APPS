@@ -7,7 +7,7 @@ import { Storage } from  '@ionic/storage';
 import { User } from  './user';
 import { Preferensi } from  './preferensi';
 import { Notifikasi } from  './notifikasi';
-import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse, DirektoriResponse, ResourceResponse, NotifikasiResponse } from  './auth-response';
+import { AuthLoginResponse, AuthRegisterResponse, PreferensiResponse, DirektoriResponse, ResourceResponse, NotifikasiResponse, BerandaResponse } from  './auth-response';
 
 
 @Injectable({
@@ -17,24 +17,9 @@ export class AuthService {
 //  AUTH_SERVER_ADDRESS:  string  =  'http://127.0.0.1:8000/api';
   AUTH_SERVER_ADDRESS:  string  =  'http://thisdaywithgod.org/index.php/api';
   authSubject  =  new  BehaviorSubject(false);
+  token: string = null;
 
   constructor(private  httpClient:  HttpClient, private  storage:  Storage) { }
-
-  buildHeaders(){
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'withCredentials': 'true'
-    });
-
-    return this.storage.get('ACCESS_TOKEN').then((token) => {
-        if(token){
-          console.log('token', token);
-          headers.append('Authorization', 'Bearer ' + token);
-          return headers;
-        }
-      }
-    )
-  }
 
   register(user: User): Observable<AuthRegisterResponse> {
     return this.httpClient.post<AuthRegisterResponse>(`${this.AUTH_SERVER_ADDRESS}/register`, user).pipe(
@@ -57,7 +42,8 @@ export class AuthService {
         if (res.status) {
           console.log("userName" , res.data.user.name);
           await this.storage.set('User_Name', res.data.user.name);
-          await this.storage.set('ACCESS_TOKEN', res.data.user.api_token);
+          await this.storage.set('ACCESS_TOKEN', res.data.token);
+          await localStorage.setItem('utoken', res.data.token);
           //await this.storage.set("ACCESS_TOKEN", res.user.access_token);
          // await this.storage.set("EXPIRES_IN", res.user.expires_in);
           this.authSubject.next(true);
@@ -67,7 +53,16 @@ export class AuthService {
   }
 
   preferensi(): Observable<PreferensiResponse> {
-    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi`).pipe(
+    let token = localStorage.getItem('utoken');
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const options = {
+      headers: headers
+    };
+
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi`, options).pipe(
       tap(async (res: PreferensiResponse) => {
 
         if (res.status) {
@@ -78,7 +73,16 @@ export class AuthService {
   }
 
   simpanPreferensi(preferensi: Preferensi): Observable<PreferensiResponse> {
-    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi`, preferensi).pipe(
+    let token = localStorage.getItem('utoken');
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const options = {
+      headers: headers
+    };
+
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi`, preferensi, options).pipe(
       tap(async (res: PreferensiResponse) => {
 
         if (res.status) {
@@ -89,7 +93,16 @@ export class AuthService {
   }
 
   hapusPreferensi(id: string): Observable<PreferensiResponse> {
-    return this.httpClient.delete(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi/`+id).pipe(
+    let token = localStorage.getItem('utoken');
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const options = {
+      headers: headers
+    };
+
+    return this.httpClient.delete(`${this.AUTH_SERVER_ADDRESS}/saya/preferensi/`+id, options).pipe(
       tap(async (res: PreferensiResponse) => {
 
         if (res.status) {
@@ -144,7 +157,16 @@ export class AuthService {
   }
 
   notifikasi(): Observable<NotifikasiResponse> {
-    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/notifikasi`).pipe(
+    let token = localStorage.getItem('utoken');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const options = {
+      headers: headers
+    };
+
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/saya/notifikasi`, options).pipe(
       tap(async (res: NotifikasiResponse) => {
 
         if (res.status) {
@@ -155,7 +177,16 @@ export class AuthService {
   }
 
   bacaNotifikasi(input: Notifikasi): Observable<NotifikasiResponse> {
-    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/notifikasi`, input).pipe(
+    let token = localStorage.getItem('utoken');
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const options = {
+      headers: headers
+    };
+
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/notifikasi`, input, options).pipe(
       tap(async (res: NotifikasiResponse) => {
 
         if (res.status) {
@@ -165,13 +196,34 @@ export class AuthService {
     );
   }
 
+  beranda(): Observable<BerandaResponse> {
+    return this.httpClient.get(`${this.AUTH_SERVER_ADDRESS}/pengaturan/beranda`).pipe(
+      tap(async (res: BerandaResponse) => {
+
+        if (res.status) {
+          console.log("pref" , res.data);
+        }
+      })
+    );
+  }
+
   logout(): Observable<AuthRegisterResponse> {
-    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/logout`, []).pipe(
+    let token = localStorage.getItem('utoken');
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    const options = {
+      headers: headers
+    };
+
+    return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/saya/logout`, [], options).pipe(
       tap(async (res: AuthRegisterResponse) => {
 
         if (res.status) {
           this.storage.remove('User_Name');
           this.storage.remove("ACCESS_TOKEN");
+          localStorage.setItem('utoken', null);
           // await this.storage.remove("EXPIRES_IN");
           // this.authSubject.next(false);
         }

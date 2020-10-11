@@ -15,7 +15,11 @@ export class SettingsPage implements OnInit {
   preferensi : PreferensiResponseData;
 
   constructor(private  authService:  AuthService, private  storage:  Storage, private  router:  Router) { }
-
+ 
+  ionViewWillEnter () {
+    this.ngOnInit();
+  }
+  
   ngOnInit() {
 	  this.storage.get('User_Name').then((result) => {
       if (result) {

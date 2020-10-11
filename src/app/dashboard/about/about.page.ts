@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
+import { Router } from  "@angular/router";
 
 @Component({
   selector: 'app-about',
@@ -8,12 +9,12 @@ import {Location} from '@angular/common';
 })
 export class AboutPage implements OnInit {
 
-  constructor(private _location: Location) { }
+  constructor(private _location: Location, private router: Router) { }
 
   ngOnInit() {
   }
 
   back() {
-    this._location.back();
+    this.router.navigateByUrl('home');
   }
 }

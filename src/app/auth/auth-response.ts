@@ -92,3 +92,15 @@ export interface NotifikasiResponse {
     data: ResourceResponseData;
     message: string;
 }
+
+export interface BerandaResponse {
+    status: boolean;
+    data: BerandaResponseData;
+    message: string;
+}
+
+export interface BerandaResponseData {
+    direktori: string;
+    data: ResourceResponseData;
+ }
+
